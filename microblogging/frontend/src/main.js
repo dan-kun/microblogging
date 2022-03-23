@@ -13,6 +13,7 @@ let customRoute = (...args) => {
 
 const pages = {
   Index: "Index.vue",
+  Publications: "Publications.vue",
 };
 
 InertiaProgress.init();
