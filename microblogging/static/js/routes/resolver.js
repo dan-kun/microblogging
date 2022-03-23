@@ -1,4 +1,4 @@
-window.routes = {"blog:index": "/", "blog:publications": "/publications"};
+window.routes = {"blog:index": "/", "blog:publications": "/publications", "blog:create_publication": "/create/publication"};
 window.reverseUrl = function(urlName) {
   var url = window.routes[urlName];
   if (!url) {

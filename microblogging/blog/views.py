@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from inertia.views import render_inertia
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from . import models, serializers
+from marshmallow import ValidationError
 
 
 def index(request):
@@ -47,3 +48,21 @@ def publications(request):
         "Publications",
         props,
     )
+
+
+def create_publication(request):
+    if request.method == "POST":
+        pub_schema = serializers.CreatePublicationSchema()
+        try:
+            data = pub_schema.loads(request.body)
+        except ValidationError as err:
+            raise ValueError("Error en data")
+        else:
+            publication = models.Publication(
+                title=data.get("title"),
+                author=data.get("author"),
+                content=data.get("content")
+            )
+            publication.save()
+
+    return redirect("blog:publications")

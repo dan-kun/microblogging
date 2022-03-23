@@ -15,3 +15,9 @@ class PublicationsSchema(Schema):
 
     def get_short_content(self, obj):
         return obj.short_content()
+
+
+class CreatePublicationSchema(Schema):
+    title = fields.Str(required=True)
+    author = fields.Str(required=True)
+    content = fields.Str(required=True)
