@@ -1,21 +1,21 @@
 {
   "status": "done",
   "assets": {
-    "main-c7b06194526b193e7f6e.css": {
-      "name": "main-c7b06194526b193e7f6e.css",
-      "path": "/home/daniel/Documentos/bitmotto/microblogging/microblogging/static/dist/main-c7b06194526b193e7f6e.css",
-      "publicPath": "/static/dist/main-c7b06194526b193e7f6e.css"
+    "main-cda5516fd6afbe518dc1.css": {
+      "name": "main-cda5516fd6afbe518dc1.css",
+      "path": "/home/daniel/Documentos/bitmotto/microblogging/microblogging/static/dist/main-cda5516fd6afbe518dc1.css",
+      "publicPath": "/static/dist/main-cda5516fd6afbe518dc1.css"
     },
-    "main-c7b06194526b193e7f6e.js": {
-      "name": "main-c7b06194526b193e7f6e.js",
-      "path": "/home/daniel/Documentos/bitmotto/microblogging/microblogging/static/dist/main-c7b06194526b193e7f6e.js",
-      "publicPath": "/static/dist/main-c7b06194526b193e7f6e.js"
+    "main-cda5516fd6afbe518dc1.js": {
+      "name": "main-cda5516fd6afbe518dc1.js",
+      "path": "/home/daniel/Documentos/bitmotto/microblogging/microblogging/static/dist/main-cda5516fd6afbe518dc1.js",
+      "publicPath": "/static/dist/main-cda5516fd6afbe518dc1.js"
     }
   },
   "chunks": {
     "main": [
-      "main-c7b06194526b193e7f6e.css",
-      "main-c7b06194526b193e7f6e.js"
+      "main-cda5516fd6afbe518dc1.css",
+      "main-cda5516fd6afbe518dc1.js"
     ]
   },
   "publicPath": "/static/dist/"
