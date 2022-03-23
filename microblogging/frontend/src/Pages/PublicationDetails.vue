@@ -38,10 +38,16 @@
         <div class="mt-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
           <p>
             <span class="ml-2 flex text-sm font-medium text-gray-500">
-              {{ publication.upVotes }}
-              <ThumbUpIcon class="w-5 h-5 text-blue-500" /> /
-              {{ publication.downVotes }}
-              <ThumbDownIcon class="w-5 h-5 text-red-500" />
+              {{ upVotes }}
+              <ThumbUpIcon
+                class="cursor-pointer w-5 h-5 text-blue-500"
+                @click="vote('up')"
+              />
+              / {{ downVotes }}
+              <ThumbDownIcon
+                class="cursor-pointer w-5 h-5 text-red-500"
+                @click="vote('down')"
+              />
             </span>
           </p>
         </div>
@@ -74,6 +80,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Layout from "../Components/Layout.vue";
 import EditPublication from "../Components/CreatePublication.vue";
 import Confirmation from "../Components/ConfirmationModal.vue";
@@ -97,6 +104,8 @@ export default {
     return {
       openEditPublication: false,
       openDeleteConfirmation: false,
+      upVotes: this.publication.upVotes,
+      downVotes: this.publication.downVotes,
     };
   },
   methods: {
@@ -104,6 +113,22 @@ export default {
       this.$inertia.get(
         this.route("blog:delete_publication", this.publication.id)
       );
+    },
+    vote(vote_type) {
+      axios
+        .get(`/publication/votes/${this.publication.id}/${vote_type}`)
+        .then((response) => {
+          if (response.data.success) {
+            var vue = this;
+            if (vote_type == "up") vue.upVotes += 1;
+            if (vote_type == "down") vue.downVotes += 1;
+          } else {
+            console.log(response.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

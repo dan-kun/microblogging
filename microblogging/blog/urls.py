@@ -13,4 +13,6 @@ urlpatterns = [
          views.edit_publication, name="edit_publication"),
     path('publication/delete/<str:publication_id>',
          views.delete_publication, name="delete_publication"),
+    path('publication/votes/<str:publication_id>/<str:vote_type>',
+         views.vote_system, name="vote_system"),
 ]

@@ -4,6 +4,7 @@ from inertia.views import render_inertia
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from . import models, serializers
 from marshmallow import ValidationError
+from django.http import JsonResponse
 
 
 def index(request):
@@ -120,3 +121,32 @@ def delete_publication(request, publication_id):
     publication.delete()
 
     return redirect("blog:publications")
+
+
+def vote_system(request, publication_id, vote_type):
+    if vote_type.lower() not in ["up", "down"]:
+        return JsonResponse(
+            {
+                "success": False,
+                "message": "Tipo de votación no habilitada"
+            },
+            status=400, safe=True
+        )
+    try:
+        publication = models.Publication.objects.get(id=publication_id)
+    except models.Publication.DoesNotExist:
+        return JsonResponse(
+            {
+                "success": False,
+                "message": "Esta publicación no existe"
+            },
+            status=400, safe=True
+        )
+
+    if vote_type.lower() == "up":
+        publication.up_votes += 1
+    else:
+        publication.down_votes += 1
+    publication.save()
+
+    return JsonResponse({"success": True}, status=200, safe=True)
