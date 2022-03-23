@@ -8,11 +8,7 @@ from django.http import JsonResponse
 
 
 def index(request):
-    props = {}
-
-    return render_inertia(
-        request, 'Index', props,
-    )
+    return redirect("blog:publications")
 
 
 def publications(request):
