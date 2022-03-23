@@ -2,6 +2,8 @@
 const path = require("path");
 const BundleTracker = require("webpack-bundle-tracker");
 const { VueLoaderPlugin } = require("vue-loader");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // Elimina los archivos antes de generar el bundle
 
 module.exports = {
   mode: "development",
@@ -17,6 +19,10 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new BundleTracker({ filename: "./webpack-stats.json" }),
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name]-[hash].css",
+    }),
   ],
 
   module: {
@@ -24,6 +30,23 @@ module.exports = {
       {
         test: /\.vue$/,
         use: "vue-loader",
+      },
+      {
+        test: /\.postcss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: "postcss-loader",
+          },
+        ],
       },
     ],
   },

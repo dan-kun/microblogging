@@ -6,13 +6,22 @@
     "build": "vite build",
     "preview": "vite preview --port 5050",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "start": "npx webpack --progress --config webpack.config.js"
+    "start": "npx webpack --progress --config webpack.config.js",
+    "tailwind": "npx tailwindcss --config tailwind.config.js --output ../static/css/tailwind.css"
   },
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@inertiajs/inertia": "^0.11.0",
     "@inertiajs/inertia-vue3": "^0.6.0",
     "@inertiajs/progress": "^0.2.7",
+    "@tailwindcss/forms": "^0.5.0",
+    "autoprefixer": "^10.4.4",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss": "^8.4.12",
+    "postcss-loader": "^6.2.1",
+    "tailwindcss": "^3.0.23",
     "vue": "^3.2.31"
   },
   "devDependencies": {
