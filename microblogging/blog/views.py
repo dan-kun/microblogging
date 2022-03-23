@@ -109,3 +109,14 @@ def edit_publication(request, publication_id):
             return redirect("blog:publication_details", publication_id)
 
     return redirect("blog:publications")
+
+
+def delete_publication(request, publication_id):
+    try:
+        publication = models.Publication.objects.get(id=publication_id)
+    except models.Publication.DoesNotExist:
+        raise ValueError("Esta publicación no existe")
+
+    publication.delete()
+
+    return redirect("blog:publications")

@@ -10,6 +10,15 @@
         @open-modal="(value) => (openEditPublication = value)"
       />
 
+      <confirmation
+        title="Eliminar Confirmación"
+        text="¿Estas seguro de eliminar esta publicación?"
+        button-title="Eliminar"
+        :open="openDeleteConfirmation"
+        @confirm-action="deletePublication"
+        @open-modal="(value) => (openDeleteConfirmation = value)"
+      />
+
       <header>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 class="text-3xl font-bold leading-tight text-gray-900">
@@ -41,6 +50,7 @@
           <button
             type="button"
             class="ml-1 flex inline-flex justify-center rounded-md border border-red-700 shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:col-start-2 sm:text-sm"
+            @click="openDeleteConfirmation = true"
           >
             Eliminar
           </button>
@@ -66,12 +76,14 @@
 <script>
 import Layout from "../Components/Layout.vue";
 import EditPublication from "../Components/CreatePublication.vue";
+import Confirmation from "../Components/ConfirmationModal.vue";
 import { ThumbUpIcon, ThumbDownIcon } from "@heroicons/vue/outline";
 
 export default {
   components: {
     Layout,
     EditPublication,
+    Confirmation,
     ThumbUpIcon,
     ThumbDownIcon,
   },
@@ -84,7 +96,15 @@ export default {
   data() {
     return {
       openEditPublication: false,
+      openDeleteConfirmation: false,
     };
+  },
+  methods: {
+    deletePublication() {
+      this.$inertia.get(
+        this.route("blog:delete_publication", this.publication.id)
+      );
+    },
   },
 };
 </script>

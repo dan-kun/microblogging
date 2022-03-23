@@ -11,4 +11,6 @@ urlpatterns = [
          views.publication_details, name="publication_details"),
     path('publication/edit/<str:publication_id>',
          views.edit_publication, name="edit_publication"),
+    path('publication/delete/<str:publication_id>',
+         views.delete_publication, name="delete_publication"),
 ]
