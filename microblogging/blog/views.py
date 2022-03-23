@@ -66,3 +66,23 @@ def create_publication(request):
             publication.save()
 
     return redirect("blog:publications")
+
+
+def publication_details(request, publication_id):
+    try:
+        pub = models.Publication.objects.get(id=publication_id)
+    except models.Publication.DoesNotExist:
+        raise ValueError("Esta publicación no existe")
+
+    pub_schema = serializers.PublicationsSchema()
+    publication = pub_schema.dump(pub)
+
+    props = {
+        "publication": publication
+    }
+
+    return render_inertia(
+        request,
+        "PublicationDetails",
+        props
+    )

@@ -28,7 +28,7 @@
                     {{ pub.content }}
                     <inertia-link
                       class="ml-2 text-sm text-blue-500 hover:text-blue-700"
-                      :href="route('blog:index')"
+                      :href="route('blog:publication_details', pub.id)"
                     >
                       Ver más
                     </inertia-link>

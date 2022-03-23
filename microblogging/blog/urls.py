@@ -7,4 +7,6 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('publications', views.publications, name="publications"),
     path('create/publication', views.create_publication, name="create_publication"),
+    path('publication/<str:publication_id>',
+         views.publication_details, name="publication_details"),
 ]
