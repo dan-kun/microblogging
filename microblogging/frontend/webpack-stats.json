@@ -1,0 +1,16 @@
+{
+  "status": "done",
+  "assets": {
+    "main-e56d745e8db53c7cc89f.js": {
+      "name": "main-e56d745e8db53c7cc89f.js",
+      "path": "/home/daniel/Documentos/bitmotto/microblogging/microblogging/static/dist/main-e56d745e8db53c7cc89f.js",
+      "publicPath": "/static/dist/main-e56d745e8db53c7cc89f.js"
+    }
+  },
+  "chunks": {
+    "main": [
+      "main-e56d745e8db53c7cc89f.js"
+    ]
+  },
+  "publicPath": "/static/dist/"
+}
