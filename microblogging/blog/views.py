@@ -86,3 +86,26 @@ def publication_details(request, publication_id):
         "PublicationDetails",
         props
     )
+
+
+def edit_publication(request, publication_id):
+    if request.method == "POST":
+        try:
+            publication = models.Publication.objects.get(id=publication_id)
+        except models.Publication.DoesNotExist:
+            raise ValueError("Esta publicación no existe")
+
+        pub_schema = serializers.CreatePublicationSchema()
+        try:
+            data = pub_schema.loads(request.body)
+        except ValidationError as err:
+            raise ValueError("Error en data")
+        else:
+            publication.title = data.get("title")
+            publication.author = data.get("author")
+            publication.content = data.get("content")
+            publication.save()
+
+            return redirect("blog:publication_details", publication_id)
+
+    return redirect("blog:publications")

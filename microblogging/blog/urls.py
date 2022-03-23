@@ -9,4 +9,6 @@ urlpatterns = [
     path('create/publication', views.create_publication, name="create_publication"),
     path('publication/<str:publication_id>',
          views.publication_details, name="publication_details"),
+    path('publication/edit/<str:publication_id>',
+         views.edit_publication, name="edit_publication"),
 ]

@@ -48,7 +48,7 @@
                 as="h3"
                 class="text-center text-lg leading-6 font-medium text-gray-900"
               >
-                Nueva Publicación
+                {{ titleModal }}
               </DialogTitle>
               <hr class="my-4" />
 
@@ -174,7 +174,7 @@
                     :disabled="isSendingForm"
                     class="w-full ml-1 flex inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
                   >
-                    Crear
+                    {{ titleButton }}
                   </button>
                 </div>
               </form>
@@ -212,6 +212,28 @@ export default {
       type: Boolean,
       default: () => false,
     },
+    titleModal: {
+      type: String,
+      default: () => "Nueva Publicación",
+    },
+    titleButton: {
+      type: String,
+      default: () => "Crear",
+    },
+    urlAction: {
+      type: String,
+      default: () => "/create/publication",
+    },
+    publication: {
+      type: Object,
+      default: () => {
+        return {
+          title: "",
+          author: "",
+          content: "",
+        };
+      },
+    },
   },
   emits: ["open-modal"],
   setup() {
@@ -230,9 +252,9 @@ export default {
     return {
       isSendingForm: false,
       form: {
-        title: "",
-        author: "",
-        content: "",
+        title: this.publication.title,
+        author: this.publication.author,
+        content: this.publication.content,
       },
       fieldsErrors: {
         title: false,
@@ -252,7 +274,7 @@ export default {
         this.fieldsErrors[item] = false;
       }
       for (const item in this.form) {
-        this.form[item] = "";
+        this.form[item] = this.publication[item];
       }
     },
     checkFieldsErrors(field) {
@@ -281,7 +303,7 @@ export default {
       let valid = this.fieldsValidate();
       if (!valid) return;
       try {
-        this.$inertia.post(this.route("blog:create_publication"), this.form, {
+        this.$inertia.post(this.urlAction, this.form, {
           onStart: () => (this.isSendingForm = true),
           onFinish: () => {
             this.isSendingForm = false;
